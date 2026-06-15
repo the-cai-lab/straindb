@@ -513,7 +513,7 @@ Strain Database is distributed under the terms of the Apache License (Apache, ve
 
 The software in this GitHub repository was developed by Research Software Engineers (RSEs) at the University of Manchester's Research IT team, as summarised [here](https://research-it.manchester.ac.uk/news/2026/05/12/revamping-the-strain-database-together/).  Development of this software was for the [Cai Lab](http://www.cailab.org/), also at the University of Manchester.  Raymond Wan has written this document as a member of Cai Lab.
 
-[Raymond Wan](https://github.com/rwanwork)
+[Raymond Wan](https://github.com/rwanwork)<br />
 12 June 2026
 
 
