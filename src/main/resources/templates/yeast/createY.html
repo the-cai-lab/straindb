@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<!--
+ Copyright 2024-2026 The Cai Lab
+
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+
+     http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+-->
+
+<html lang="en">
+
+<head th:replace="~{fragments/head::common_head(title=${pagetitle})}">
+</head>
+
+
+
+<body>
+    <div class="container-fluid">
+        <div class="row flex-nowrap">
+            <div class="col-auto px-2 px-0">
+                <div class="d-flex flex-column align-items-start px-3 pt-5 min-vh-100">
+                    <!--logo area -->
+                    <a th:replace="~{fragments/logoarea::text_logo(text=${pagetextlogo})}"></a>
+                    <!--nav menu area-->
+                    <div th:replace="~{fragments/homeleftnavS::homeleftnavS}"></div>
+                </div>
+            </div>
+            <div class="col p-0">
+                <!-- search bar-->
+                <div th:replace="~{fragments/topsearchbar::topsearchbar}"></div>
+                <form th:object="${yeast}" method="post" th:action="@{'/yeast/createY'}" autocomplete="off" id="yeast_create_form">
+                    <br>
+                    <br>
+                    <br>
+                    <!-- The input text below -->
+                    <div class="container-fluid text-left">
+                        <div id="header" class="jumbotron alltitle">
+                            <h1 id="title">Create Yeast</h1>
+                            <div th:if="${#fields.hasErrors('*')}" class="alert alert-danger">
+                                <ul>
+                                    <li th:each="error: ${#fields.errors('*')}" th:text="${error}"></li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div class="row justify-content-start">
+                          <div class="col-md-10">
+                            <p>Enter data into the form below.  Fields marked with a "*" are required and must not be blank in order for your data to be saved.</p>
+                          </div>
+                        </div>
+
+                        <div class="row justify-content-start">
+                            <div class="col-md-5">
+                                <div id="headerOtherNames" class="jumbotron text-left header_U_C_Y">
+                                    <p class="lead">Other Names</p>
+                                </div>
+                                <input th:field="*{other_names}" class="form-control me-2 text-black border-dark btn-sm px-2 input_U_C_Y" maxlength="255">
+                            </div>
+                            <div class="col-md-5">
+                                <div id="headerMatingType" class="jumbotron text-left header_U_C_Y">
+                                    <p class="lead">Mating Type</p>
+                                </div>
+                                <select th:field="*{mating_types.id}" class="form-control me-2 text-black border-dark btn-sm px-2 input_U_C_Y">t
+                                    <option value=""></option>
+                                    <option th:each="mt : ${mating_types}" th:value="${mt.id}" th:text="${mt.name}" th:selected="${mt.id} == *{mating_types?.id}"></option>
+                                </select>
+                            </div>
+                        </div>
+                        <br>
+
+                        <div class="row justify-content-start">
+                            <div class="col-md-5">
+                                <div id="headerGenotype" class="jumbotron text-left header_U_C_Y">
+                                    <p class="lead">Genotype *</p>
+                                </div>
+                                <input th:field="*{genotype}" class="form-control me-2 text-black border-dark btn-sm px-2 input_U_C_Y" maxlength="255">
+                            </div>
+                            <div class="col-md-5">
+                                <div id="headerPlasmld" class="jumbotron text-left header_U_C_Y">
+                                    <p class="lead">Plasmid</p>
+                                </div>
+                                <input th:field="*{plasmid}" class="form-control me-2 text-black border-dark btn-sm px-2 input_U_C_Y" maxlength="255">
+                            </div>
+                        </div>
+                        <br>
+                            
+                        <div class="row justify-content-start">
+                            <div class="col-md-5">
+                                <div id="headerPlasmldType" class="jumbotron text-left header_U_C_Y">
+                                    <p class="lead">Plasmid Type</p>
+                                </div>
+                                <input th:field="*{plasmid_type}" class="form-control me-2 text-black border-dark btn-sm px-2 input_U_C_Y" maxlength="255">
+                            </div>
+                            <div class="col-md-5">
+                                <div id="headerParentYeastId" class="jumbotron text-left header_U_C_Y">
+                                    <p class="lead">Parent Yeast ID</p>
+                                </div>
+                                <input th:field="*{parent_name1}" class="form-control me-2 text-black border-dark btn-sm px-2 input_U_C_Y" maxlength="255">
+                            </div>
+                        </div>
+                        <br>
+                            
+                        <div class="row justify-content-start">
+                            <div class="col-md-5">
+                                <div id="headerOtherParentYeastId" class="jumbotron text-left header_U_C_Y">
+                                    <p class="lead">Other Parent Yeast ID</p>
+                                </div>
+                                <input th:field="*{parent_name2}" class="form-control me-2 text-black border-dark btn-sm px-2 input_U_C_Y" maxlength="255">
+                            </div>
+                            <div class="col-md-5">
+                                <div id="headerYeastMarkers" class="jumbotron text-left header_U_C_Y" >
+                                    <p class="lead">Yeast Markers </p>
+                                    <p class="lead">Please add a ";" between each markers</p>
+                                </div>
+                                <input th:field = "*{markers_list}" class="form-control me-2 text-black border-dark btn-sm px-2 input_U_C_Y"  maxlength="255">
+                            </div>
+                        </div>
+                        <br>
+                            
+                        <div class="row justify-content-start">
+                            <div class="col-md-10">
+                                <div id="headerComments" class="jumbotron header_U_C_Y">
+                                    <p class="lead">Comments</p>
+                                </div>
+                                <textarea th:field="*{comments}" class="form-control me-2 text-black border-dark btn-sm px-2 input_U_C_Y" rows="3" placeholder="(Provide some description about the sample.)"></textarea>
+                            </div>
+                        </div>
+                        <br> 
+                        
+                        <div class="row justify-content-start">
+                            <div class="col-md-5">
+                                <div id="headerLocation" class="jumbotron text-left header_U_C_Y">
+                                    <p class="lead">Location</p>
+                                </div>
+                                <input th:field="*{location}" class="form-control me-2 text-black border-dark btn-sm px-2 input_U_C_Y" maxlength="255" placeholder="(Example:  Box 3, location C4)" />
+                            </div>
+                            <div class="col-md-5">
+                                <div id="headerDate" class="jumbotron header_U_C_Y">
+                                    <p class="lead">Date *</p>
+                                </div>
+                                <input type="text" th:value="*{#dates.format(date, 'yyyy-MM-dd HH:mm')}" class="form-control" id="date" name="date" style="max-width: 100%;">
+                            </div>
+                        </div>
+                        <br>
+                        
+                        <div class="row justify-content-start">    
+                            <div class="col-md-5">
+                                <div id="headerOtherMatingType" class="jumbotron text-left header_U_C_Y">
+                                    <p class="lead">Other Mating Type</p>
+                                </div>
+                                <input th:field="*{other_mating_type}" class="form-control me-2 text-black border-dark btn-sm px-2 input_U_C_Y" maxlength="255">
+                            </div>
+                        </div>
+                        <br>
+                    </div>        
+
+                    <!-- The submit button -->
+                    <div class="position-absolute bottom-1 end-0 p-5">
+                        <button class="btn btn-dark btn-lg border-white rounded" name="submit" value="submit" style="margin-right: 100px;">Submit +</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        $(document).ready(function () {
+            // Attach a date and time picker to the input field
+            $('#date').datetimepicker({
+                // Other configuration
+                showButtonPanel: true,
+                useCurrent: false,
+                format: 'Y-m-d H:i:s',
+                step: 1,
+                value: new Date()
+            });
+
+
+            //modify datepicker format to require timestamp format
+            $('#yeast_create_form').submit(function () {
+                //yyyy-mm-dd hh:mm:ss
+                var patternWithMilliseconds = /^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$/;
+                //yyyy-mm-dd hh:dd
+                var patternWithoutMilliseconds = /^\d{4}-\d{2}-\d{2} \d{2}:\d{2}$/;
+
+                //Get the current datetime value and append '.000' for second and millisecond
+                var datetimeValue = $('#date').val();
+
+
+                if (patternWithMilliseconds.test(datetimeValue)) {
+                    //add back millisecond
+                    datetimeValue = datetimeValue + ".000";
+                } else if (patternWithoutMilliseconds.test(datetimeValue)) {
+                    //add back second and millisecond
+                    datetimeValue = datetimeValue + ":00.000";
+                }
+
+                // Update the value of the datetime field before submitting the form
+                $('#date').val(datetimeValue);
+                console.log($('#date').val());
+            });
+        });
+
+    </script>
+
+
+
+
+    <div th:replace="~{fragments/bodyend::bodyend}"></div>
+</body>
+
+</html>

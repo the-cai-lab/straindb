@@ -1,0 +1,42 @@
+/*
+ * Copyright 2024-2026 The Cai Lab
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package database.cailab.org.website.service;
+
+import org.springframework.web.multipart.MultipartFile;
+
+import database.cailab.org.website.dto.UserPlantsCountDto;
+import database.cailab.org.website.entity.Plants;
+import database.cailab.org.website.entity.Users;
+
+import java.util.List;
+
+public interface PlantsService {
+    public List<Plants> getAllPlantsOrderByIdDesc();
+
+    public List<UserPlantsCountDto> getUserWithPlantsCount();
+
+    public Plants getPlantsById(Integer id);
+
+    public Plants createPlants(Plants plants, Users user) throws Exception;
+
+    public Plants getPlantsByIdWithUnescapesHTML(Integer id);
+
+    public Plants updatePlants(Integer id, Plants plants) throws Exception;
+
+    public List<Plants> createBatchPlants(MultipartFile file, Users user) throws Exception;
+    
+} 

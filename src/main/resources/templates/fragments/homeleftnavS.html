@@ -1,0 +1,90 @@
+<!--
+ Copyright 2024-2026 The Cai Lab
+
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+
+     http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+-->
+
+<nav class="navbar navbar-expand-sm navbar-light" th:fragment="homeleftnavS">
+    <div class="container-fluid">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav flex-column mb-sm-auto mb-0 align-items-start navbar-light" id="menu">
+                <li class="nav-item">
+                    <a th:href="@{/bacteria}" class="nav-link align-middle px-2">
+                        <span class="fs-4 d-block d-sm-inline sidenavfont">BACTERIA</span>
+                    </a>
+                </li>
+                <br>
+                <li class="nav-item">
+                    <a th:href="@{/primers}" class="nav-link align-middle px-2">
+                        <span class="fs-4 d-block d-sm-inline sidenavfont">PRIMERS</span>
+                    </a>
+                </li>
+                <br>
+                <li class="nav-item">
+                    <a th:href="@{/yeast}" class="nav-link align-middle px-2">
+                        <span class="fs-4 d-block d-sm-inline sidenavfont">YEASTS</span>
+                    </a>
+                </li>
+                <br>
+                <li class="nav-item">
+                    <a th:href="@{/mammalian}" class="nav-link align-middle px-2">
+                        <span class="fs-4 d-block d-sm-inline sidenavfont">MAMMALIAN</span>
+                    </a>
+                </li>
+                <br>
+                <li class="nav-item">
+                    <a th:href="@{/plants}" class="nav-link align-middle px-2">
+                        <span class="fs-4 d-block d-sm-inline sidenavfont">PLANTS</span>
+                    </a>
+                </li>
+                <br>                
+                <li class="nav-item" sec:authorize="hasAnyRole('ADMIN')">
+                    <a th:href="@{/users}" class="nav-link align-middle px-2">
+                        <span class="fs-4 d-block d-sm-inline sidenavfont">MANAGE USERS</span>
+                    </a>
+                </li>
+                <br sec:authorize="hasAnyRole('ADMIN')">
+                
+                <li class="nav-item">
+                    <a th:href="@{/about}" class="nav-link align-middle px-2">
+                        <span class="fs-4 d-block d-sm-inline sidenavfont">ABOUT</span>
+                    </a>
+                </li>
+                <br>    
+                <li class="nav-item">
+                    <a href="#" class="nav-link align-middle px-2" id="signout">
+                        <span class="fs-4 d-block d-sm-inline sidenavfont cursor-pointer">SIGN OUT</span>
+                    </a>
+                </li>
+                <br>
+                <li class="nav-item">
+                    <a href="/assets/User_Manual.pdf" download class="btn btn-primary" role="button" target="_blank">Download User Manual</a>
+                </li>
+                <br sec:authorize="hasAnyRole('ADMIN')">
+                <li class="nav-item" sec:authorize="hasAnyRole('ADMIN')">
+                    <a href="/assets/Admin_User_Manual.pdf" download class="btn btn-primary" role="button" target="_blank">Download Admin User Manual</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div style="display:none;"><form th:action="@{/logout}" method="post" id="signoutrequest"></form></div>
+    <script>
+        $("#signout").click(function(){
+            $("#signoutrequest").submit();
+        });
+    </script>
+</nav>

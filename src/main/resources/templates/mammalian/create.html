@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<!--
+ Copyright 2024-2026 The Cai Lab
+
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+
+     http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+-->
+
+<html lang="en">
+<head th:replace="~{fragments/head::common_head(title=${pagetitle})}">
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row flex-nowrap">
+            <div class="col-auto px-2 px-0">
+                <div class="d-flex flex-column align-items-start px-3 pt-5 min-vh-100">
+                    <!--logo area -->
+                    <a th:replace="~{fragments/logoarea::text_logo(text=${pagetextlogo})}"></a>
+                    <!--nav menu area-->
+                    <div th:replace="~{fragments/homeleftnavS::homeleftnavS}"></div>
+                </div>
+            </div>
+            <div class="col p-0">
+                <form th:object="${mammalian}" method="post" th:action="@{'/mammalian/create'}" autocomplete="off" id="mammalian_create_form">    
+                    <br>
+                    <br>
+                    <br>
+                    <!-- The input text below -->
+                    <div class="container-fluid text-left">
+                        <div id="header" class="jumbotron alltitle">
+                            <h1 id="title">Create Mammalian</h1>
+                            <!-- Display errors message-->
+                            <div th:if="${#fields.hasErrors('*')}" class="alert alert-danger">
+                                <ul>
+                                    <li th:each="error : ${#fields.errors('*')}" th:text="${error}"></li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="row justify-content-start">
+                          <div class="col-md-10">
+                            <p>Enter data into the form below.  Fields marked with a "*" are required and must not be blank in order for your data to be saved.</p>
+                          </div>
+                        </div>
+
+                        <div class="row justify-content-start">
+                            <div class="col-md-5">
+                                <div id="headerName" class="jumbotron text-left header_U_C_B">
+                                    <p class="lead">Name</p>
+                                </div>
+                                <input type="text" th:field="*{name}" class="form-control me-2 text-black border-dark btn-sm px-2 input_U_C_B" maxlength="255" placeholder="" />
+                            </div>
+                            <div class="col-md-5">
+                                <div id="headerCellLine" class="jumbotron text-left header_U_C_B">
+                                    <p class="lead">Cell Line *</p>
+                                </div>
+                                <input type="text" th:field="*{cell_line}" class="form-control me-2 text-black border-dark btn-sm px-2 input_U_C_B" maxlength="255" placeholder="(Example:  HEK293T)" />
+                            </div>
+                        </div>
+                        <br>
+
+                        <div class="row justify-content-start">
+                            <div class="col-md-5">
+                                <div id="headerPassageNumber" class="jumbotron text-left header_U_C_B">
+                                    <p class="lead">Passage Number *</p>
+                                </div>
+                                <input type="text" th:field="*{passage_number}" class="form-control me-2 text-black border-dark btn-sm px-2 input_U_C_B" style="max-width: 100%;" placeholder="(Example:  42)" />
+                            </div>
+                            <div class="col-md-5">
+                                <div id="headerCellType" class="jumbotron text-left header_U_C_B">
+                                    <p class="lead">Cell Type</p>
+                                </div>
+                                <input type="text" th:field="*{cell_type}" class="form-control me-2 text-black border-dark btn-sm px-2 input_U_C_B" maxlength="255" />
+                            </div>
+                        </div>
+                        <br>
+
+
+                        <div class="row justify-content-start">
+                            <div class="col-md-5">
+                                <div id="headerKaryotype" class="jumbotron text-left header_U_C_B">
+                                    <p class="lead">Karyotype</p>
+                                </div>
+                                <input type="text" th:field="*{karyotype}" class="form-control me-2 text-black border-dark btn-sm px-2 input_U_C_B" maxlength="255" placeholder="(Example:  diploid)" />
+                            </div>
+                            <div class="col-md-5">
+                                <div id="headerGenotype" class="jumbotron text-left header_U_C_B">
+                                    <p class="lead">Genotype</p>
+                                </div>
+                                <input type="text" th:field="*{genotype}" class="form-control me-2 text-black border-dark btn-sm px-2 input_U_C_B" maxlength="255" />
+                            </div>
+                        </div>
+                        <br>
+
+                        <div class="row justify-content-start">
+                            <div class="col-md-5">
+                                <div id="headerSource" class="jumbotron text-left header_U_C_B">
+                                    <p class="lead">Source</p>
+                                </div>
+                                <input type="text" th:field="*{source}" class="form-control me-2 text-black border-dark btn-sm px-2 input_U_C_B" maxlength="255" placeholder="(Example:  Acme Corporation)" />
+                            </div>
+                            <div class="col-md-5">
+                                <div id="headerMarker" class="jumbotron text-left header_U_C_B">
+                                    <p class="lead">Marker</p>
+                                </div>
+                                <input type="text" th:field="*{marker}" class="form-control me-2 text-black border-dark btn-sm px-2 input_U_C_B" maxlength="255" />
+                            </div>
+                        </div>
+                        <br>
+
+                        <div class="row justify-content-start">
+                            <div class="col-md-5">
+                                <div id="headerMedia" class="jumbotron text-left header_U_C_B">
+                                    <p class="lead">Media *</p>
+                                </div>
+                                <input type="text" th:field="*{media}" class="form-control me-2 text-black border-dark btn-sm px-2 input_U_C_B" maxlength="255" placeholder="(Example:  4.5 g/L glucose)" />
+                            </div>
+                            <div class="col-md-5">
+                                <div id="headerSpecies" class="jumbotron text-left header_U_C_B">
+                                    <p class="lead">Species *</p>
+                                </div>
+                                <select th:field="*{mammalianSpecies.ncbiid}" class="form-control bg-white text-black me-2" style="width: 100%;">
+                                    <option value=""></option>
+                                    <option th:each="mam : ${mammalianSpeciesList}" th:value="${mam.ncbiid}" th:text="|${mam.scientific_name} (${mam.ncbiid})|"></option>
+                                </select>
+                            </div>
+                        </div>
+                        <br>
+
+                        <div class="row justify-content-start">
+                            <div class="col-md-5">
+                                <div id="headerDateFrozen" class="jumbotron text-left header_U_C_B">
+                                    <p class="lead">Date Frozen *</p>
+                                </div>
+                                <input type="text" id="datefrozen" name="datefrozen" th:field="*{datefrozen}" class="form-control" style="max-width: 100%;">
+                            </div>
+                        </div>
+                        <br>
+
+                        <div class="row justify-content-start">
+                            <div class="col-md-10">
+                                <div id="headerComments" class="jumbotron text-left header_U_C_B">
+                                    <p class="lead">Comments</p>
+                                </div>
+                                <textarea th:field="*{comments}" class="form-control me-2 text-black border-dark btn-sm px-2 input_U_C_B" rows="3" placeholder="(Provide some description about the sample.)" ></textarea>
+                            </div>
+
+                        </div>
+                        <br>
+
+                        <div class="row justify-content-start">
+                            <div class="col-md-5">
+                                <div id="headerLocation" class="jumbotron text-left header_U_C_B">
+                                    <p class="lead">Location</p>
+                                </div>
+                                <input type="text" th:field="*{location}" class="form-control me-2 text-black border-dark btn-sm px-2 input_U_C_B" maxlength="255" placeholder="(Example:  Box 3, location C4)" />
+                            </div>
+                            <div class="col-md-5">
+                                <div id="headerDate" class="jumbotron text-left header_U_C_B">
+                                    <p class="lead">Date *</p>
+                                </div>
+                                <input type="text" id="date" name="date" th:field="*{date}" class="form-control" style="max-width: 100%;">
+                            </div>
+                        </div>
+                        <br>
+
+                    </div>
+                    <!-- The submit button -->
+                    <div class="position-absolute bottom-1 end-0 p-5">
+                        <button class="btn btn-dark btn-lg border-white rounded" name="submit" value="submit" style="margin-right: 100px;">Submit +</button>
+                    </div>
+                    
+                </form>
+                
+            </div>
+        </div>
+    </div>
+    <script th:src="@{/js/common.js}"></script>
+    <script th:src="@{/js/mammalian.js}"></script>
+    <div th:replace="~{fragments/bodyend::bodyend}"></div>
+
+</body>
+</html>

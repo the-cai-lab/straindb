@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<!--
+ Copyright 2024-2026 The Cai Lab
+
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+
+     http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+-->
+
+<html lang="en">
+<head th:replace="~{fragments/head::common_head(title=${pagetitle})}">
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row flex-nowrap">
+            <div class="col-auto px-2 px-0">
+                <div class="d-flex flex-column align-items-start px-3 pt-5 min-vh-100">
+                    <!--logo area -->
+                    <a th:replace="~{fragments/logoarea::text_logo(text=${pagetextlogo})}"></a>
+                    <!--nav menu area-->
+                    <div th:replace="~{fragments/homeleftnavS::homeleftnavS}"></div>
+                </div>
+            </div>
+            <div class="col p-0">
+                <form th:object="${plants}" method="post" th:action="@{'/plants/update/'+ *{id}}" enctype="multipart/form-data" autocomplete="off" id="plants_edit_form">
+                    <br>    
+                    <br>
+                    <br>
+                    <!-- The input text below -->
+                    <div class="container-fluid text-left">
+                        <div id="header" class="jumbotron alltitle">
+                            <h1 id="title">Edit Plants</h1>
+                            <!-- Display errors message-->
+                             <div th:if="${#fields.hasErrors('*')}" class="alert alert-danger">
+                                <ul>
+                                    <li th:each="error : ${#fields.errors('*')}" th:text="${error}"></li>
+                                </ul>
+                            </div>
+                            <!-- Display errors message-->
+                            <div th:if="${error != null}" class="alert alert-danger">
+                                <span th:utext="${error}"></span>
+                            </div>
+
+                            <div class="row justify-content-start">
+                                <div class="col-md-5">
+                                    <div id="headerName" class="jumbotron text-left header_U_C_B">
+                                        <p class="lead">Name</p>
+                                    </div>
+                                    <input type="text" th:field="*{name}" class="form-control me-2 text-black border-dark btn-sm px-2 input_U_C_B" maxlength="255" />
+                                </div>
+                                <div class="col-md-5">
+                                    <div id="headerGrowthConditions" class="jumbotron text-left header_U_C_B">
+                                        <p class="lead">Growth conditions</p>
+                                    </div>
+                                    <input type="text" th:field="*{growthConditions}" class="form-control me-2 text-black border-dark btn-sm px-2 input_U_C_B" maxlength="255" />
+                                </div>
+                            </div>
+                            <br>
+
+                            <div class="row justify-content-start">
+                                <div class="col-md-5">
+                                    <div id="headerGenotype" class="jumbotron text-left header_U_C_B">
+                                        <p class="lead">Genotype *</p>
+                                    </div>
+                                    <input type="text" th:field="*{genotype}" class="form-control me-2 text-black border-dark btn-sm px-2 input_U_C_B" maxlength="255" />
+                                </div>
+                                <div class="col-md-5">
+                                    <div id="headerSource" class="jumbotron text-left header_U_C_B">
+                                        <p class="lead">Source</p>
+                                    </div>
+                                    <input type="text" th:field="*{source}" class="form-control me-2 text-black border-dark btn-sm px-2 input_U_C_B" maxlength="255" />
+                                </div>
+                            </div>
+                            <br>
+
+                            <div class="row justify-content-start">
+                                <div class="col-md-5">
+                                    <div id="headerMarker" class="jumbotron text-left header_U_C_B">
+                                        <p class="lead">Marker</p>
+                                    </div>
+                                    <input type="text" th:field="*{marker}" class="form-control me-2 text-black border-dark btn-sm px-2 input_U_C_B" maxlength="255" />
+                                </div>
+                                <div class="col-md-5">
+                                    <div id="headerMedia" class="jumbotron text-left header_U_C_B">
+                                        <p class="lead">Media</p>
+                                    </div>
+                                    <input type="text" th:field="*{media}" class="form-control me-2 text-black border-dark btn-sm px-2 input_U_C_B" maxlength="255" />
+                                </div>
+                            </div>
+                            <br>
+
+                            <div class="row justify-content-start">
+                                <div class="col-md-5">
+                                    <div id="headerSpecies" class="jumbotron text-left header_U_C_B">
+                                        <p class="lead">Species *</p>
+                                    </div>
+                                    <select th:field="*{plantSpecies.ncbiid}" class="form-control bg-white text-black me-2" style="width: 100%;">
+                                        <option value=""></option>
+                                        <option th:each="pl : ${plantSpeciesList}" th:value="${pl.ncbiid}" th:text="|${pl.scientific_name} (${pl.ncbiid})|"></option>
+                                    </select>
+                                </div>
+                            </div>
+                            <br>
+
+                            <div class="row justify-content-start">
+                                <div class="col-md-10">
+                                    <div id="headerComments" class="jumbotron text-left header_U_C_B">
+                                        <p class="lead">Comments</p>
+                                    </div>
+                                    <textarea th:field="*{comments}" class="form-control me-2 text-black border-dark btn-sm px-2 input_U_C_B" rows="3"></textarea>
+                                </div>
+                            </div>
+                            <br>
+
+                            <div class="row justify-content-start">
+                                <div class="col-md-5">
+                                    <div id="headerLocation" class="jumbotron text-left header_U_C_B">
+                                        <p class="lead">Location</p>
+                                    </div>
+                                    <input type="text" th:field="*{location}" class="form-control me-2 text-black border-dark btn-sm px-2 input_U_C_B" maxlength="255" />
+                                </div>
+                                <div class="col-md-5">
+                                    <div id="headerDate" class="jumbotron text-left header_U_C_B">
+                                        <p class="lead">Date *</p>
+                                    </div>
+                                    <input type="text" id="date" name="date" th:value="*{#dates.format(date, 'yyyy-MM-dd HH:mm')}" class="form-control" style="max-width: 100%;">
+                                </div>
+                            </div>
+                            <br>
+
+                            <!-- The submit button -->
+                            <div class="position-absolute bottom-1 end-0 p-5">
+                                <button class="btn btn-dark btn-lg border-white rounded" name="cancel" type="reset" onclick="history.go(-1)" style="margin-right: 20px;">Cancel</button>
+                                <button class="btn btn-dark btn-lg border-white rounded" name="submit" type="submit" style="margin-right: 100px;">Submit +</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script th:src="@{/js/common.js}"></script>
+    <script th:src="@{/js/plants.js}"></script>
+    <div th:replace="~{fragments/bodyend::bodyend}"></div>
+</body>    
+</html>

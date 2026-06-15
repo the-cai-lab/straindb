@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<!--
+ Copyright 2024-2026 The Cai Lab
+
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+
+     http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+-->
+
+<html lang="en">
+
+<head th:replace="~{fragments/head::common_head(title=${pagetitle})}">
+</head>
+
+
+
+<body>
+    <div class="container-fluid">
+        <div class="row flex-nowrap">
+            <div class="col-auto px-2 px-0">
+                <div class="d-flex flex-column align-items-start px-3 pt-5 min-vh-100">
+                    <!--logo area -->
+                    <a th:replace="~{fragments/logoarea::text_logo(text=${pagetextlogo})}"></a>
+                    <!--nav menu area-->
+                    <div th:replace="~{fragments/homeleftnavS::homeleftnavS}"></div>
+                </div>
+            </div>
+            <div class="col p-0">
+                <!-- search bar-->
+                <div th:replace="~{fragments/topsearchbar::topsearchbar}"></div>
+        
+                <div class="container-fluid text-left">
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <a th:href="@{'/users/updateU/' + ${users.getId()}}" class="btn btn-dark btn-lg me-4 border-white float-end" role="button">Edit</a>
+                    <br>
+                    <br>
+                    <div class="container-fluid text-left">
+                        <table class="table">
+                            <tbody>
+                                <tr>
+                                    <th>Id</th>
+                                    <th th:text="${users.getId()}">Id</th>
+                                </tr>
+                                <tr>
+                                    <th>Email</th>
+                                    <th th:text="${users.getEmail()}">Email</th>
+                                </tr>
+                                <tr>
+                                    <th>First name</th>
+                                    <th th:text="${users.getFirstname()}">First name</th>
+                                </tr>
+                                <tr>
+                                    <th>Last name</th>
+                                    <th th:text="${users.getLastname()}">Last name</th>
+                                </tr>  
+                                <tr>
+                                    <th>Name</th>
+                                    <th th:text="${users.getName()}"> Name </th>
+                                </tr>     
+                                <tr>
+                                    <th>Initials</th>
+                                    <th th:text="${users.getInitials()}"> Initials </th>
+                                </tr>  
+                                <tr>
+                                    <th>Role</th>
+                                    <th th:text="${users.getUserRole.getRole()}"> Role</th>
+                                </tr>                         
+                                <tr>
+                                    <th>Encrypted password</th>
+                                    <th th:text="${users.getEncrypted_password()}"> Encrypted password </th>
+                                </tr>
+                                <tr>
+                                    <th>Reset password token</th>
+                                    <th th:text="${users.getReset_password_token()}"> Reset password token </th>
+                                </tr>
+                                <tr>
+                                    <th>Reset password sent at</th>
+                                    <th th:utext="${#dates.format(users.getReset_password_sent_at(), 'yyyy-MM-dd HH:mm:ss')}">Reset password sent at</th>
+                                </tr>
+                                <tr>
+                                    <th>Sign in count</th>
+                                    <th th:text="${users.getSign_in_count()}">Sign in Count</th>
+                                </tr>
+                                <tr>
+                                    <th>Current sign in at</th>
+                                    <th th:text="${#dates.format(users.getCurrent_sign_in_at(), 'yyyy-MM-dd HH:mm:ss')}"> Current sign in at </th>
+                                </tr>
+                                <tr>
+                                    <th>Last sign in at</th>
+                                    <th th:text="${#dates.format(users.getLast_sign_in_at(), 'yyyy-MM-dd HH:mm:ss')}"> Last sign in at </th>
+                                </tr>
+                                <tr>
+                                    <th>Current sign in ip</th>
+                                    <th th:text="${users.getCurrent_sign_in_ip()}"> Current sign in ip </th>
+                                </tr>
+                                <tr>
+                                    <th>Last sign in ip</th>
+                                    <th th:text="${users.getLast_sign_in_ip()}"> Last sign in ip </th>
+                                </tr>
+                                <tr>
+                                    <th>Created at</th>
+                                    <th th:text="${#dates.format(users.getCreated_at(), 'yyyy-MM-dd HH:mm:ss')}"> Created at </th>
+                                </tr>
+                                <tr>
+                                    <th>Updated at</th>
+                                    <th th:text="${#dates.format(users.getUpdated_at(), 'yyyy-MM-dd HH:mm:ss')}"> Updated at </th>
+                                </tr>
+                                <!--<tr>
+                                    <th>Admin</th>
+                                    <th><input type="checkbox" th:checked="${users.getAdmin() == true}" disabled="disabled"> </th>
+                                </tr>
+                                <tr>
+                                    <th>Edit</th>
+                                    <th><input type="checkbox" th:checked="${users.getCan_edit() == true}" disabled="disabled"> </th>
+                                </tr>-->
+
+                                <tr>
+                                    <th>Deactivated</th>
+                                    <th><input type="checkbox" th:checked="${users.getDeactivate() == true}" disabled="disabled"> </th>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+
+                </div>
+        </div>
+    </div>
+</div>
+
+
+<div th:replace="~{fragments/bodyend::bodyend}"></div>
+</body>
+
+</html>

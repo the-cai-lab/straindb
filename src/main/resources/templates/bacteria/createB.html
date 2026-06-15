@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<!--
+ Copyright 2024-2026 The Cai Lab
+
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+
+     http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+-->
+
+<html lang="en">
+
+<head th:replace="~{fragments/head::common_head(title=${pagetitle})}">
+</head>
+
+
+
+<body>
+    <div class="container-fluid">
+        <div class="row flex-nowrap">
+            <div class="col-auto px-2 px-0">
+                <div class="d-flex flex-column align-items-start px-3 pt-5 min-vh-100">
+                    <!--logo area -->
+                    <a th:replace="~{fragments/logoarea::text_logo(text=${pagetextlogo})}"></a>
+                    <!--nav menu area-->
+                    <div th:replace="~{fragments/homeleftnavS::homeleftnavS}"></div>
+                </div>
+            </div>
+            <div class="col p-0">
+                <!-- search bar-->
+                <div th:replace="~{fragments/topsearchbar::topsearchbar}"></div>
+                <form th:object="${bacteria}" method="post" th:action="@{'/bacteria/createB'}" autocomplete="off" id="bacteria_create_form">
+                    <br>
+                    <br>
+                    <br>
+                    <!-- The input text below -->
+                    <div class="container-fluid text-left">
+                        <div id="header" class="jumbotron alltitle">
+                            <h1 id="title">Create Bacterium</h1>
+                            <!-- Display errors message-->
+                            <div th:if="${#fields.hasErrors('*')}" class="alert alert-danger">
+                                <ul>
+                                    <li th:each="error : ${#fields.errors('*')}" th:text="${error}"></li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="row justify-content-start">
+                          <div class="col-md-10">
+                            <p>Enter data into the form below.  Fields marked with a "*" are required and must not be blank in order for your data to be saved.</p>
+                          </div>
+                        </div>
+
+                        <div class="row justify-content-start">
+                            <div class="col-md-5">
+                                <div id="headerPlasmldName" class="jumbotron text-left header_U_C_B">
+                                    <p class="lead">Plasmid Name</p>
+                                </div>
+                                <input type="text" th:field="*{plasmid_name}" class="form-control me-2 text-black border-dark btn-sm px-2 input_U_C_B" maxlength="255" />
+                            </div>
+                            <div class="col-md-5">
+                                <div id="headerAlternateName" class="jumbotron text-left header_U_C_B">
+                                    <p class="lead">Alternative Name</p>
+                                </div>
+                                <input type="text" th:field="*{alternate_name}" class="form-control me-2 text-black border-dark btn-sm px-2 input_U_C_B" maxlength="255" />
+                            </div>
+                        </div>
+                        <br>
+                        
+                        <div class="row justify-content-start">
+                            <div class="col-md-5">
+                                <div id="headerGenotype" class="jumbotron text-left header_U_C_B">
+                                    <p class="lead">Genotype</p>
+                                </div>
+                                <input type="text" th:field="*{genotype}" class="form-control me-2 text-black border-dark btn-sm px-2 input_U_C_B" style="width: 100%;" maxlength="255" />
+                            </div>
+                            <div class="col-md-5">
+                                <div id="headerHostStrain" class="jumbotron text-left header_U_C_B">
+                                    <p class="lead">Host Strain</p>
+                                </div>
+                                <input type="text" th:field="*{host_strain}" class="form-control me-2 text-black border-dark btn-sm px-2 input_U_C_B" style="width: 100%;" maxlength="255" />
+                            </div>
+                        </div>
+                        <br> 
+                        
+                        <div class="row justify-content-start">
+                            <div class="col-md-5">
+                                <div id="headerBacterialMarker" class="jumbotron text-left header_U_C_B">
+                                    <p class="lead">Bacterial marker</p>
+                                </div>
+                                <select th:field="*{bacterialMarkers.id}" class="form-control bg-white text-black me-2" style="width: 100%;">
+                                    <option value=""></option>
+                                    <option th:each="bm : ${bacterialMarkers}" th:value="${bm.id}" th:text="${bm.name}"></option>
+                                </select>
+                            </div>
+                            <div class="col-md-5">
+                                <div id="headerOtherBacterialMarker" class="jumbotron text-left header_U_C_B">
+                                    <p class="lead">Other bacterial marker</p>
+                                </div>
+                                <input type="text" th:field="*{other_bacterial_marker}" class="form-control me-2 text-black border-dark btn-sm px-2 input_U_C_B" style="width: 100%;" maxlength="255" />
+                            </div>
+                        </div>  
+                        <br>                                             
+
+                        <div class="row justify-content-start">
+                            <div class="col-md-10">
+                                <div id="headerComments" class="jumbotron header_U_C_B">
+                                    <p class="lead">Comments</p>
+                                </div>
+                                <textarea th:field="*{comments}" class="form-control me-2 text-black border-dark btn-sm px-2 input_U_C_B" rows="3" placeholder="(Provide some description about the sample.)"></textarea>
+                            </div>
+                        </div>
+                        <br>
+
+                        <!-- The date input -->
+                        <div class="row justify-content-start">
+                            <div class="col-md-5">
+                                <div id="headerLocation" class="jumbotron text-left header_U_C_B">
+                                    <p class="lead">Location</p>
+                                </div>
+                                <input type="text" th:field="*{location}" class="form-control me-2 text-black border-dark btn-sm px-2 input_U_C_B" style="width: 100%;" placeholder="(Example:  Box 3, location C4)" />
+                            </div>
+                            <div class="col-md-5">
+                                <div id="headerDate" class="jumbotron header_U_C_B">
+                                    <p class="lead">Date *</p>
+                                </div>
+                                <input type="text" id="date" name="date" th:field="*{date}" class="form-control" style="max-width: 100%;">
+                            </div>
+                        </div>
+                        <br>
+
+                        <div class="row justify-content-start">
+                          <div class="col-md-10">
+                            <p>After this record is created, you can edit it and upload the plasmid sequence in SnapGene, Genbank, or FASTA format.</p>
+                          </div>
+                        </div>
+
+                    </div>
+                    <!-- The submit button -->
+                    <div class="position-absolute bottom-1 end-0 p-5">
+                        <button class="btn btn-dark btn-lg border-white rounded" name="submit" value="submit" style="margin-right: 100px;">Submit +</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script th:src="@{/js/common.js}"></script>
+    <script th:src="@{/js/bacteria.js}"></script>
+    <div th:replace="~{fragments/bodyend::bodyend}"></div>
+
+</body>
+
+</html>

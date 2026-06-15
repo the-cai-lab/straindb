@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<!--
+ Copyright 2024-2026 The Cai Lab
+
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+
+     http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+-->
+
+<html lang="en">
+
+<head th:replace="~{fragments/head::common_head(title=${pagetitle})}">
+</head>
+
+
+
+<body>
+    <div class="container-fluid">
+        <div class="row flex-nowrap">
+            <div class="col-auto px-2 px-0">
+                <div class="d-flex flex-column align-items-start px-3 pt-5 min-vh-100">
+                    <!--logo area -->
+                    <a th:replace="~{fragments/logoarea::text_logo(text=${pagetextlogo})}"></a>
+                    <!--nav menu area-->
+                    <div th:replace="~{fragments/homeleftnavS::homeleftnavS}"></div>
+                </div>
+            </div>
+            <div class="col p-0">
+                <!-- search bar-->
+                <div th:replace="~{fragments/topsearchbar::topsearchbar}"></div>
+        
+                <div class="container-fluid text-left">
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <!-- title -->
+                    <div id="header" class="jumbotron alltitle" >
+                        <h1 id="title" th:text="|${yeast.getPersonal_id()}, ${yeast.getLab_id()} |">
+                        </h1>
+                    </div>
+                    <!-- links for new and edit -->
+                    <a th:if="${#authentication.principal.id == yeast.user.getId() }" th:href="@{'/yeast/updateY/' + ${yeast.getId()}}" class="btn btn-dark btn-lg me-4 border-white float-end" role="button">Edit</a>
+                    <a href="/yeast/createY" class="btn btn-dark btn-lg me-4 border-white float-end" role="button">New</a>
+                    <br>
+                    <br>
+                    <!-- table for the dummy data -->
+                    <div class="container-fluid text-left">
+                        <table class="table">
+                            <tbody>
+                                <tr>
+                                    <th>Personal ID</th>
+                                    <th th:text="${yeast.getPersonal_id()}"></th>
+                                </tr>                                
+                                <tr>
+                                    <th>Lab ID</th>
+                                    <th th:text="${yeast.getLab_id()}"></th>
+                                </tr>
+                                <tr>
+                                    <th>Other Names</th>
+                                    <th th:text="${yeast.getOther_names()}"></th>
+                                </tr>
+                                <tr>
+                                    <th>Mating Type</th>
+                                    <th th:text="${yeast.getMating_types()?.getName()}"></th>
+                                </tr>
+                                <tr>
+                                    <th>Genotype</th>
+                                    <th th:utext="${yeast.getGenotype()}"></th>
+                                </tr>                                
+                                <tr>
+                                    <th>Plasmid</th>
+                                    <th th:utext="${yeast.getPlasmid()}"></th>
+                                </tr>                                
+                                <tr>
+                                    <th>Plasmid Type</th>
+                                    <th th:text="${yeast.getPlasmid_type()}"></th>
+                                </tr>                                
+                                <tr>
+                                    <th>Parent Name</th>
+                                    <th th:text="${yeast.getParent_name1()}"></th>
+                                    <!-- <th class="table-headerY">
+                                        <a th:href="@{'/yeast/' + ${yeast.parent_id}}" th:text="${yeast.parent_id}"></a>
+                                    </th> -->
+                                </tr>                                
+                                <tr>
+                                    <th>Other Parent Type</th>
+                                    <th th:text="${yeast.getParent_name2()}"></th>
+                                    <!-- <th class="table-headerY">
+                                        <a th:href="@{'/yeast/' + ${yeast.parent_id}}" th:text="${yeast.parent_id}"></a>
+                                    </th> -->
+                                </tr>
+                                <tr>
+                                    <th>Markers</th>
+                                    <th th:text="${yeast.getMarkers_list()} "></th>
+                                </tr>
+                                <tr>
+                                    <th>Comments</th>
+                                    <th th:utext="${yeast.getComments()}"></th>
+                                </tr>                                
+                                <tr>
+                                    <th>Location</th>
+                                    <th th:text="${yeast.getLocation()}"></th>
+                                </tr>
+                                <tr>
+                                    <th>Date</th>
+                                    <th th:text="${#dates.format(yeast.getDate(), 'yyyy-MM-dd HH:mm:ss')}"></th>
+                                </tr>
+                                <tr>
+                                    <th>Other Mating Type</th>
+                                    <th th:text="${yeast.getOther_mating_type()}"></th>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+
+                </div>
+        </div>
+    </div>
+</div>
+
+
+<div th:replace="~{fragments/bodyend::bodyend}"></div>
+</body>
+
+</html>

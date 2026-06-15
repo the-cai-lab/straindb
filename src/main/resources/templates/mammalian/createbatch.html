@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<!--
+ Copyright 2024-2026 The Cai Lab
+
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+
+     http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+-->
+
+<html lang="en">
+
+<head th:replace="~{fragments/head::common_head(title=${pagetitle})}">
+</head>  
+<body>
+    <div class="container-fluid">
+        <div class="row flex-nowrap">
+            <div class="col-auto px-2 px-0">
+                <div class="d-flex flex-column align-items-start px-3 pt-5 min-vh-100">
+                    <!--logo area -->
+                    <a th:replace="~{fragments/logoarea::text_logo(text=${pagetextlogo})}"></a>
+                    <!--nav menu area-->
+                    <div th:replace="~{fragments/homeleftnavS::homeleftnavS}"></div>
+                </div>
+            </div>
+            <div class="col p-0">
+                <form method="post" th:action="@{'/mammalian/createBatch'}" enctype="multipart/form-data" autocomplete="off" id="mammalian_batch_create_form">   
+                    <div class="container-fluid text-left">
+                        <div id="header" class="jumbotron alltitle">
+                             <h1 id="title">Batch Create Mammalian</h1>
+                             <!-- Display errors message-->
+                            <div th:if="${error != null}" class="alert alert-danger">
+                                <ul>
+                                    <span th:utext="${error}"></span>
+                                </ul>
+                            </div>
+
+                            <div class="row justify-content-start">
+                                <div class="col-md-5">
+                                    <div class="input-group mb-3">
+                                        <label for="fileInput"  style="font-size: 16px; font-weight: bold;">Upload a completed batch create form:</label>
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <input type="file" class="form-control" id="fileInput" name="fileInput" style="max-width: 80%;">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <br>
+                        </div>
+                        
+                        <div class="position-absolute bottom-1 end-0 p-5">
+                            <button class="btn btn-dark btn-lg border-white rounded" name="submit" value="submit" style="margin-right: 100px;">Submit +</button>
+                        </div>
+                    </div>
+                </form>
+                
+                <div>
+                    <label for="Download"  style="font-size: 16px; font-weight: bold;">Download the template (CSV):</label>
+                </div>
+                <div>
+                    <a href="/assets/mammalians-template.csv" download class="btn btn-primary" role="button" target="_blank">Download Mammalian Batch Create Format</a>
+                </div>
+                <div class="mt-5">
+                  <p>About the template:
+                    <ol>
+                        <li>Do not change the header (first line) of the template.  Also, do not change the order of the columns, add new columns, or remove columns.</li>
+                        <li>The "cell_line", "passage_number", "media", "species", and "frozen_date" are mandatory and cannot be left blank, as indicated by the "*".</li>
+                        <li>Valid values for "passage_number" are positive integers <b>only</b>. </li>
+                        <li>Some valid values for "species" are "human" or "house mouse" (case-insensitive).  Contact the system administrator if you want other species to be added to this list.  (Hint:  Purposely submit a record with an incorrect value to see the options available to you in the error message.)</li>
+                        <li>The "frozen_date" should be in either YYYY-MM-DD or DD-MM-YYYY format only.</li>
+                        <li>Other than the aforementioned "passage_number", "species", and "frozen_date", all other fields are free-form text strings.  Tab characters will be replaced with spaces. Please avoid using tabs in your input.</li>
+                        <li>If you plan to edit the template using Microsoft Excel and you have used non-English characters (i.e., Greek characters, etc.), then you must save as the "CSV UTF-8" format. Do not select "CSV" (with "UTF-8" omitted).</li>
+                    </ol>
+                  </p>
+                  <p>If you have problems having an upload being validated, then feel free to let the system administrator know.</p>
+                </div>                
+            </div>
+
+        </div>
+    </div>
+    <div th:replace="~{fragments/bodyend::bodyend}"></div>
+</body>
+</html>

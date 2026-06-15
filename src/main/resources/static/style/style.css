@@ -1,0 +1,466 @@
+/**
+ * Copyright 2024-2026 The Cai Lab
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+a:hover {
+  text-decoration: none;
+}
+
+.sidenavfont {
+  font-family: "Alegreya Sans SC", sans-serif;
+}
+
+.sidenavtitle {
+  line-height: 33px;
+  font-size: 50px;
+}
+
+#menu li {
+  border-left: 3px solid #000000;
+}
+
+.carousel-item img {
+  width: 100%;
+  height: 707px;
+}
+
+.carousel-ref {
+  position: relative;
+}
+
+.rowoverlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 0;
+  margin: 0;
+  height: 100%;
+  z-index: 1;
+}
+
+.carousel_grid {
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+.carousel_slide1 {
+  background-image: url("/assets/carousel-1.png");
+}
+
+.carousel_slide2 {
+  background-image: url("/assets/carousel-2.png");
+}
+
+.carousel_slide3 {
+  background-image: url("/assets/carousel-3.png");
+}
+
+.carousel_slide4 {
+  background-image: url("/assets/carousel-4.png");
+}
+.backgroundGrid {
+  width: 100%;
+  height: 100%;
+  background-image: url("/assets/grid2-f596eadc53bbef10917ff9f053968dbc312393b055c487a8ff8a8c24c51e3b3c.png");
+  opacity: 0.1;
+}
+
+.imgfilter {
+  background-color: #000000;
+  opacity: 0.4;
+  filter: alpha(opacity=50);
+  -moz-opacity: 0.4;
+  -khtml-opacity: 0.4;
+}
+
+::placeholder {
+  /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: #636c72 !important;
+  opacity: 1; /* Firefox */
+}
+
+:-ms-input-placeholder {
+  /* Internet Explorer 10-11 */
+  color: #636c72 !important;
+}
+
+::-ms-input-placeholder {
+  /* Microsoft Edge */
+  color: #636c72 !important;
+}
+/* for user headers */
+.table-headerU {
+  background-color: white;
+  color: black;
+}
+/* for users text box */
+.custom-styleU {
+  color: black;
+  background-color: rgb(211, 210, 210);
+  border-color: black;
+}
+/* for bacteria index headers */
+.table-headerB {
+  background-color: white;
+  color: black;
+}
+/* for bacteria create and update headers */
+.header_U_C_B {
+  color: #ffffff;
+  background-color: rgb(91, 122, 174);
+  max-width: 100%;
+}
+/* for bacteria create and update inputs */
+.input_U_C_B {
+  width: 100%;
+  background-color: rgb(168, 176, 190);
+  max-width: 100%;
+}
+/* for primers index headers */
+.table-headerP {
+  background-color: white;
+  color: black;
+}
+/* for primers create and update headers */
+.header_U_C_P {
+  color: #ffffff;
+  background-color: rgb(91, 122, 174);
+  max-width: 100%;
+}
+/* for primers create and update inputs */
+.input_U_C_P {
+  width: 100%;
+  background-color: rgb(168, 176, 190);
+  max-width: 100%;
+}
+/* for yeast index headers */
+.table-headerY {
+  background-color: white;
+  color: black;
+}
+/* for yeast create and update headers */
+.header_U_C_Y {
+  color: #ffffff;
+  background-color: rgb(91, 122, 174);
+  max-width: 100%;
+}
+/* for yeast create and update inputs */
+.input_U_C_Y {
+  width: 100%;
+  background-color: rgb(168, 176, 190);
+  max-width: 100%;
+}
+/* for all pages title */
+.alltitle {
+  color: #000000;
+  background-color: rgb(255, 255, 255);
+}
+
+/* style for the loading overlay*/
+/* The overlay effect - lays on top of the page */
+/* The overlay size is set to take up the whole datatable area */
+/* The overlay loading icon is horizontally centered 
+    and vertically 250px from the top of the datatable area */
+.overlay{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  display: flex;
+  vertical-align: middle;
+  justify-content: center;
+  padding-top: 250px;
+}
+
+
+
+
+/*
+body {
+  background-color: #ffffff;
+}
+
+textarea {
+  height: 122px;
+}
+
+.sidenav {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 220px;
+  height: calc(100% - 60px);
+  min-height: 600px;
+
+  background-color: #ffffff;
+  color: #000000;
+  font-size: 20px;
+
+  font-family: "Alegreya Sans SC", sans-serif;
+
+  padding: 30px;
+  padding-bottom: 0px;
+
+  overflow: hidden;
+}
+
+.sidenavtitle {
+  font-family: "Alegreya Sans SC", sans-serif;
+  line-height: 18px;
+}
+
+.sidenav ul {
+  list-style: none;
+  padding: 0;
+  margin-left: 0;
+}
+
+.sidenav li {
+  margin-bottom: 5px;
+  padding-bottom: 5px;
+  padding-top: 5px;
+  padding-left: 15px;
+  border-radius: 3px;
+  border-left: 3px solid #000000;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+.logos {
+  //position: absolute;
+  bottom: 0px;
+  left: 0px;
+}
+
+.lecontent {
+  position: absolute;
+
+  width: -moz-calc(100% - 260px);
+  width: -webkit-calc(100% - 260px);
+  width: calc(100% - 260px);
+
+  top: 0px;
+  left: 260px;
+  height: 100%;
+  padding: 0px;
+}
+
+.lewrap {
+  padding-top: 70px;
+  padding-bottom: 50px;
+  padding-right: 30px;
+  font-family: "Ubuntu Mono", sans-serif;
+}
+
+.searchbar {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+
+.sidenav a {
+  color: #000000;
+}
+
+.control-label {
+  width: 100%;
+  padding: 5px;
+  margin: 0px;
+  color: white;
+  background-color: #7777aa;
+}
+
+.hoverbutton {
+  background-color: #000000;
+  color: #ffffff;
+  width: 200px;
+  font-size: 120%;
+  height: auto;
+  float: right;
+
+  margin-right: 5px;
+
+  text-align: center;
+  vertical-align: middle;
+
+  padding: 7px;
+}
+
+.hoverbutton:visited {
+  color: #ffffff;
+}
+
+.hoverbutton:hover {
+  background-color: #2f2f2f;
+  color: #ffffff;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.controls {
+  display: inline;
+}
+
+.input-prepend {
+  display: inline;
+}
+
+select {
+  -webkit-appearance: none;
+  -webkit-border-radius: 0px;
+  padding: 0px;
+  padding-left: 5px;
+
+  border-left: 0px;
+  outline: none;
+  border: 1px;
+  box-shadow: none;
+
+  background-color: #ededed;
+
+  width: 100%;
+
+  margin-top: 0px;
+  padding-top: 0px;
+}
+
+select.date {
+  width: 10%;
+}
+
+textarea:focus,
+input:focus {
+  outline: 0;
+}
+
+input,
+textarea,
+select {
+  -webkit-appearance: none;
+  -webkit-border-radius: 0px;
+
+  border-left: 0px;
+  outline: none;
+  border: none;
+  box-shadow: none;
+
+  background-color: #ededed;
+  display: inline;
+
+  padding: 5px;
+
+  //width: 250px ;
+  width: 100%;
+
+  border-style: solid;
+  border-width: 3px;
+  //font-family: 'Alegreya Sans SC', sans-serif;
+}
+
+input.required {
+  background-color: #ededed;
+  box-shadow: none;
+}
+
+input.optional {
+  background-color: #ededed;
+  box-shadow: none;
+}
+
+textarea.optional {
+  background-color: #ededed;
+  box-shadow: none;
+}
+
+input.black {
+  border-left: 0px;
+  outline: none;
+  border: none;
+  background-color: #000000;
+  box-shadow: none;
+}
+
+.add-on {
+  border-color: #ededed;
+  background-color: #ededed;
+
+  display: inline;
+
+  height: 200%;
+  min-width: 50px;
+  text-align: left;
+
+  font-size: 105%;
+  color: "#2f2f2f";
+}
+
+.formwrap {
+  background-color: #ededed;
+  padding: 0px;
+  overflow: hidden;
+}
+
+td {
+  padding: 5px;
+}
+
+td td {
+  padding: 0px;
+}
+
+.badge {
+  vertical-align: middle;
+  margin-left: 5px;
+  font-size: 105%;
+  font-weight: normal;
+}
+
+input,
+select,
+textarea {
+  margin-top: 6px;
+  margin-bottom: 6px;
+}
+
+.inlineItem {
+  display: inline-block;
+}
+
+.halfWidth {
+  width: 45%;
+  height: 100%;
+}
+
+.filterButton {
+  padding: 2px 8px;
+  background-color: black;
+  color: white;
+  display: inline-block;
+}
+
+.filterButton:hover {
+  background-color: #333355;
+}
+
+.countdown {
+  margin: 10px 0px 10px 0px;
+}
+*/
