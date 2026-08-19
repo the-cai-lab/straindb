@@ -32,10 +32,3 @@ build/
 ### VS Code ###
 .vscode/
 
-### notepad++ / git merge backup ###
-*.orig
-*.bak
-*.pl
-*.txt
-*.xlsx
-
